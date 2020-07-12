@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -8,13 +9,12 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UsersComponent implements OnInit {
 
-  public users;
+  public users$: Observable<any>;
 
   constructor(private client: HttpClient) {}
 
-  ngOnInit() {
-    this.client.get('https://api.github.com/users')
-      .subscribe(usersResponse => this.users = usersResponse);
+  ngOnInit(): void {
+    this.users$ = this.client.get('https://api.github.com/users');
   }
 
 }

@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let user of users">
+  <mat-list-item *ngFor="let user of users$ | async">
     <img mat-list-avatar [src]="user.avatar_url" [alt]="user.login">
     <h3 mat-subheader>{{user.login}}</h3>
   </mat-list-item>
