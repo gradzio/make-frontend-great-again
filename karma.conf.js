@@ -4,9 +4,10 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', 'pact'],
     plugins: [
       require('karma-jasmine'),
+      require('@pact-foundation/karma-pact'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
@@ -27,6 +28,15 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    pact: [{
+      cors: true,
+      port: 8100,
+      consumer: 'github-app',
+      provider: 'api.github.com',
+      log: require('path').resolve(process.cwd(), 'pacts', 'pact.log'),
+      dir: 'pacts',
+      spec: 2
+    }]
   });
 };

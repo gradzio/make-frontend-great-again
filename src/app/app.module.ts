@@ -7,6 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UsersComponent } from './pages/users/users.component';
+import {environment} from '../environments/environment';
+import {GITHUB_URL} from '../app.config';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,10 @@ import { UsersComponent } from './pages/users/users.component';
     MatListModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [{
+    provide: GITHUB_URL,
+    useValue: environment.github
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
