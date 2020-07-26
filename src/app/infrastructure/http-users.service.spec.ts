@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UsersService } from './users.service';
+import { HttpUsersService } from './http-users.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Matchers, PactWeb} from '@pact-foundation/pact-web';
 import getAllUsersStub from './stubs/get-all-users.stub.json';
 import {GITHUB_URL} from '../../app.config';
 
-describe('UsersService', () => {
-  let service: UsersService;
+describe('HttpUsersService', () => {
+  let service: HttpUsersService;
   let provider;
 
   beforeAll(done => {
@@ -36,7 +36,7 @@ describe('UsersService', () => {
         useValue: 'http://localhost:8100'
       }]
     });
-    service = TestBed.inject(UsersService);
+    service = TestBed.inject(HttpUsersService);
   });
 
   afterAll(done => {

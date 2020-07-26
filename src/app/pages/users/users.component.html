@@ -1,6 +1,14 @@
-<mat-list>
-  <mat-list-item *ngFor="let user of users$ | async">
-    <img mat-list-avatar [src]="user.avatar_url" [alt]="user.login">
+<div *ngIf="users$ | async as users else loading">
+<mat-list *ngIf="users.length > 0 else noUsers">
+  <mat-list-item *ngFor="let user of users">
+    <img mat-list-avatar [src]="user.avatarUrl.url" [alt]="user.login">
     <h3 mat-subheader>{{user.login}}</h3>
   </mat-list-item>
 </mat-list>
+</div>
+<ng-template #noUsers>
+  <p>There are not users :(</p>
+</ng-template>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

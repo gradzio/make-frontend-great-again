@@ -9,6 +9,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { UsersComponent } from './pages/users/users.component';
 import {environment} from '../environments/environment';
 import {GITHUB_URL} from '../app.config';
+import {HttpUsersService} from './infrastructure/http-users.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+export const serviceUrlProvider = {
+  provide: GITHUB_URL,
+  useValue: environment.github
+};
 
 @NgModule({
   declarations: [
@@ -21,12 +28,13 @@ import {GITHUB_URL} from '../app.config';
     BrowserAnimationsModule,
     HttpClientModule,
     MatListModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule
   ],
-  providers: [{
-    provide: GITHUB_URL,
-    useValue: environment.github
-  }],
+  providers: [
+    serviceUrlProvider,
+    {provide: 'GetsAllUsers', useClass: HttpUsersService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../domain/user.model';
+import { GetsAllUsers } from '../../domain/users.service';
 
 @Component({
   selector: 'app-users',
@@ -10,12 +10,12 @@ import {UserModel} from '../../domain/user.model';
 })
 export class UsersComponent implements OnInit {
 
-  public users$: Observable<UserModel>;
+  public users$: Observable<UserModel[]>;
 
-  constructor(private client: HttpClient) {}
+  constructor(@Inject('GetsAllUsers') private usersService: GetsAllUsers) {}
 
   ngOnInit(): void {
-    this.users$ = this.client.get<UserModel>('https://api.github.com/users');
+    this.users$ = this.usersService.getAll();
   }
 
 }
