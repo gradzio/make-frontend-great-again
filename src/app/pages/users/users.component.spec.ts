@@ -65,13 +65,13 @@ describe('UsersComponent', () => {
 
   });
 
-  it('should render users in a list', () => {
-    const userStub: UserModel[] = [
+  it('should render multiple users in the list', () => {
+    const usersStub: UserModel[] = [
       { login: 'login1', avatarUrl: { url: 'https://image.com/image1.jpg' } },
-      { login: 'login2', avatarUrl: { url: 'https://image.com/image2.jpg' } }
+      { login: 'login2', avatarUrl: { url: 'https://image.com/image2.jpg' } },
     ];
     const getAllUsersSpy = spyOn(usersService, 'getAll')
-      .and.returnValue(of(userStub));
+      .and.returnValue(of(usersStub));
 
     component.ngOnInit();
 
@@ -80,11 +80,11 @@ describe('UsersComponent', () => {
     component.users$.subscribe(_ => {
       fixture.detectChanges();
       const userItems = fixture.debugElement.queryAll(By.css('.mat-list-item'));
-      const h3Element = userItems[0].query(By.css('h3'));
-      const imgElement = userItems[0].query(By.css('img'));
-      expect(userItems.length).toEqual(userStub.length);
-      expect(h3Element.nativeElement.textContent).toEqual(userStub[0].login);
-      expect(imgElement.nativeElement.src).toEqual(userStub[0].avatarUrl.url);
+      expect(userItems.length).toEqual(usersStub.length);
+      expect(userItems[0].query(By.css('img')).nativeElement.src)
+        .toEqual(usersStub[0].avatarUrl.url);
+      expect(userItems[0].query(By.css('h3')).nativeElement.textContent)
+        .toEqual(usersStub[0].login);
     });
 
   });

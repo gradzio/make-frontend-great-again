@@ -11,6 +11,7 @@ import {environment} from '../environments/environment';
 import {GITHUB_URL} from '../app.config';
 import {HttpUsersService} from './infrastructure/http-users.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HomeComponent } from './pages/home/home.component';
 
 export const serviceUrlProvider = {
   provide: GITHUB_URL,
@@ -20,7 +21,8 @@ export const serviceUrlProvider = {
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent
+    UsersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
