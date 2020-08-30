@@ -1,4 +1,4 @@
-import {InMemoryHandlerResolver} from './in-memory-handler-resolver.service';
+import {InMemoryHandlerResolver} from './in-memory.handler-resolver';
 
 describe('InMemoryHandlerRegistry', () => {
   it('should resolve registered handler', () => {

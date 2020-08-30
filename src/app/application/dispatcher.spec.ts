@@ -4,7 +4,6 @@ import {UsersState} from '../domain/users.state';
 import {makeUsersStub, makeUserState} from '../domain/users.state.spec';
 import {GetsAllUsers} from '../domain/users.service';
 import {GETS_ALL_USERS_STUB_PROVIDER} from '../domain/get-all-users.service.stub';
-import {InMemoryHandlerResolver} from '../infrastructure/handler-registries/in-memory-handler-resolver.service';
 
 describe('Dispatcher', () => {
   let dispatcher: Dispatcher;
@@ -25,15 +24,6 @@ describe('Dispatcher', () => {
           useFactory: (getsAllUsers: GetsAllUsers) => makeUserState(makeUsersStub(0), getsAllUsers),
           deps: ['GetsAllUsers']
         },
-        {
-          provide: 'HANDLER_RESOLVER',
-          useFactory: (userStateDep: UsersState) => new InMemoryHandlerResolver({
-            [commandStub.type]: {
-                handle: (command: any): void => { userStateDep.loadAllUsers(command); }
-              }
-            }),
-          deps: [UsersState]
-        }
       ]
     });
 

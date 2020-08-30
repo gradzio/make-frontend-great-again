@@ -1,8 +1,5 @@
+import {CommandHandler} from './handlers/handler';
 
-export interface CommandHandler {
-  handle(command: any): void;
-}
-
-export interface HandlerResolver {
-  resolve(command: any): CommandHandler;
+export interface HandlerResolver<T> {
+  resolve(command: T): CommandHandler<T>;
 }
