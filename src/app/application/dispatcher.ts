@@ -1,16 +1,4 @@
-import Func = jasmine.Func;
 import {Injectable} from '@angular/core';
-
-// export interface Command {
-//   type: string;
-// }
-
-export class Loadusers {
-  static type = 'Load Users';
-  get type(): string {
-    return Loadusers.type;
-  }
-}
 
 @Injectable()
 export class Dispatcher {
@@ -19,7 +7,7 @@ export class Dispatcher {
     this.handlers[command.type](command);
   }
 
-  registerHandler(commandType: string, handler: Func): void {
+  registerHandler(commandType: string, handler: (command: any) => void): void {
     this.handlers[commandType] = handler;
   }
 }

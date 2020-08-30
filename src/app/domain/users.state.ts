@@ -3,7 +3,7 @@ import {UserModel} from './user.model';
 import {GetsAllUsers} from './users.service';
 import {Inject, Injectable} from '@angular/core';
 import {map, tap} from 'rxjs/operators';
-import {Dispatcher, Loadusers} from '../application/dispatcher';
+import {Dispatcher} from '../application/dispatcher';
 
 export interface UsersStateModel {
   allUsers: UserModel[];
@@ -16,15 +16,11 @@ export class UsersState {
   constructor(
     private initialState: UsersStateModel,
     @Inject('GetsAllUsers') private getsAllUsers: GetsAllUsers,
-    private dispatcher: Dispatcher
   ) {
     this.subject.next({...initialState});
-    this.dispatcher.registerHandler(Loadusers.type, this.loadAllUsers);
-    this.dispatcher.dispatch(new Loadusers());
   }
 
-  loadAllUsers(command: Loadusers): void {
-    console.log('aha');
+  loadAllUsers(command: any): void {
     this.getsAllUsers.getAll()
       .pipe(
         tap(users => this.subject.next({allUsers: [...users], count: users.length}))
