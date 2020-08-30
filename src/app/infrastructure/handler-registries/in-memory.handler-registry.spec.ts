@@ -1,13 +1,12 @@
-import {InMemoryHandlerRegistry} from './in-memory.handler-registry';
+import {InMemoryHandlerResolver} from './in-memory-handler-resolver.service';
 
 describe('InMemoryHandlerRegistry', () => {
   it('should resolve registered handler', () => {
-    const handlerRegistry = new InMemoryHandlerRegistry();
-    const commandStub = {type: 'type', payload: {}};
     const commandHandlerStub = { handle: (command: any) => {} };
-    handlerRegistry.registerHandler(commandStub, commandHandlerStub);
+    const commandStub = {type: 'type', payload: {}};
+    const handlerRegistry = new InMemoryHandlerResolver({[commandStub.type]: commandHandlerStub});
 
-    const actual = handlerRegistry.resolveHandler(commandStub);
+    const actual = handlerRegistry.resolve(commandStub);
 
     expect(actual).toEqual(commandHandlerStub);
   });
