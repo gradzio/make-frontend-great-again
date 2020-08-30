@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {HandlerResolver} from './handler-resolver';
 
 @Injectable()
 export class Dispatcher {
-  private handlers = {};
-  dispatch(command: any): void {
-    this.handlers[command.type](command);
-  }
 
-  registerHandler(commandType: string, handler: (command: any) => void): void {
-    this.handlers[commandType] = handler;
+  constructor(@Inject('HANDLER_RESOLVER') private handlerResolver: HandlerResolver) {}
+
+  dispatch(command: any): void {
+    this.handlerResolver.resolve(command).handle(command);
   }
 }
