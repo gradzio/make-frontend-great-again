@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {HandlerResolver} from './handler-resolver';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class Dispatcher {
 
   constructor(@Inject('HANDLER_RESOLVER') private handlerResolver: HandlerResolver<any>) {}

@@ -8,7 +8,8 @@ class TestCommandHandler extends AbstractCommandHandler<TestCommand> {
 }
 
 class AnotherCommandHandler extends AbstractCommandHandler<AnotherCommand> {
-  protected readonly command = AnotherCommand;
+  protected readonly command
+    = AnotherCommand;
   handle(command: AnotherCommand): void {}
 }
 
