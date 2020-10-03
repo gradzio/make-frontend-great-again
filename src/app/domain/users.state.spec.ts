@@ -15,7 +15,7 @@ export const makeUsersStub = (count: number): UserModel[] =>
     }));
 
 export const makeUserState = (usersStub: UserModel[], getsAllUsers: GetsAllUsers): UsersState =>
-  new UsersState({allUsers: usersStub, count: usersStub.length}, getsAllUsers);
+  new UsersState({allUsers: usersStub, count: usersStub.length});
 
 describe('UsersState', () => {
   let getAllUsers: GetsAllUsers;
@@ -54,7 +54,7 @@ describe('UsersState', () => {
     const getAllUsersSpy = spyOn(getAllUsers, 'getAll')
       .and.returnValue(of(usersStub));
 
-    state.loadAllUsers({});
+    state.loadAllUsers(usersStub);
 
     expect(getAllUsersSpy).toHaveBeenCalled();
     state.allUsers$
@@ -79,7 +79,7 @@ describe('UsersState', () => {
     const getAllUsersSpy = spyOn(getAllUsers, 'getAll')
       .and.returnValue(of(newUsersStub));
 
-    state.loadAllUsers({});
+    state.loadAllUsers(newUsersStub);
 
     expect(getAllUsersSpy).toHaveBeenCalled();
     state.allUsers$
